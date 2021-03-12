@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Tmdb from './TmDb'
 import './App.css'
-import MovieRow from './components/MovieRow'
-import FeaturedMovie from './components/FeaturedMovie'
+import MovieRow from './components/MovieRow/index'
+import FeaturedMovie from './components/FeaturedMovie/index'
+import Header from './components/Header/index'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
 
   const [movieList, setMovieList] = useState([])
   const [featureData, serFeatureData] = useState(null)
+  const [blackHeader, setBlackHeader] = useState(false)
 
   useEffect(() => {
     const loadAll = async () => {
@@ -26,8 +28,25 @@ export default () => {
     loadAll()
   }, []);
 
+  useEffect(() => {
+    const scrollListener = () => {
+      if(window.scrollY > 10){
+        setBlackHeader(true)
+      } else {
+        setBlackHeader(false)
+      }
+    }
+
+    window.addEventListener('scroll', scrollListener)
+    return () => {
+      window.removeEventListener('scroll', scrollListener)
+    }
+  } , []);
+
   return (
     <div className="page">
+
+      <Header black = {blackHeader}></Header>
 
       {featureData && 
         <FeaturedMovie item = {featureData}></FeaturedMovie>
@@ -40,6 +59,11 @@ export default () => {
           </MovieRow>
         ))}
       </section>
+
+      <footer>
+        Direitos de imagem para Netflix <br></br>
+        Dados coletados do site Themoviedb.org
+      </footer>
     </div>
   )
 }
