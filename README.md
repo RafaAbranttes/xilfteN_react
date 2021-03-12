@@ -1,7 +1,7 @@
 # Projeto Clone UI 
 
 * Projeto de estudo de React
-* Utilizando a API do <a href="themoviedb.org">The Movie DB</a>
+* Utilizando a API do <a href="https://www.themoviedb.org/">The Movie DB</a>
 
  Para funcionar deve adicionar um arquivo em "/src" chamado de ApiKey.js e adicionar o seguinte código:
 
@@ -11,6 +11,6 @@ export function RetornarKey(){
 }
 
 export function RetornarKeyBase(){
-    return ''   //adicionar a url padrão da api
+    return 'https://api.themoviedb.org/3'    //adicionar a url padrão da api
 }
  ``` 
